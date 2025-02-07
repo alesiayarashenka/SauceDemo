@@ -22,22 +22,16 @@ public class LoginTest {
         userName.sendKeys("standard_user");
         password.sendKeys("secret_sauce");
         loginButton.click();
-        String productName = driver.findElement(By.xpath("//*[text()='Sauce Labs Backpack']")).getText();
-        String productPrice = driver.findElement(By.xpath("//*[contains(@id,'sauce-labs-backpack')]/../div[@class='inventory_item_price']")).getText();
         WebElement addToCartButton = driver.findElement(By.xpath("//*[@data-test='add-to-cart-sauce-labs-backpack']"));
         WebElement cartButton = driver.findElement(By.id("shopping_cart_container"));
+        String productName = driver.findElement(By.xpath("//*[text()='Sauce Labs Backpack']")).getText();
+        String productPrice = driver.findElement(By.xpath("//*[contains(@id,'sauce-labs-backpack')]/../div[@class='inventory_item_price']")).getText();
         addToCartButton.click();
         cartButton.click();
         WebElement nameProductInCart = driver.findElement(By.xpath("//div[@class='inventory_item_name']"));
-        Assert.assertEquals(nameProductInCart.getText(), productName);
         String productPriceInCart = driver.findElement(By.xpath("//div[@class='inventory_item_price']")).getText();
+        Assert.assertEquals(nameProductInCart.getText(), productName);
         Assert.assertEquals(productPriceInCart.split("\n")[0], productPrice.split("\n")[0]);
         driver.quit();
-
-
-
-
-
-
     }
 }
