@@ -18,12 +18,13 @@ public class MainPage {
     private  final WebElement cssByTag = driver.findElement(By.cssSelector("input"));
     private  final WebElement cssByClass = driver.findElement(By.cssSelector("input.class"));
 
-    //*[@class='login_wrapper-inner']//descendant::div
-    //*[@class='login_wrapper-inner']//parent::div
-    //*[text()='Test']//ancestor::div
-    //input[@id='password']/preceding::input[1]
-    //input[@id='password']/preceding-sibling::input[1]
-    //*[@class='login_wrapper-inner']/following-sibling::div
+    //*[@class='login_wrapper-inner']//descendant::div -- Выбирает всех потомков
+    //*[@class='login_wrapper-inner']//parent::div -- выбрать элемент, являющийся прямым родительским
+    //*[text()='Test']//ancestor::div -- Выбирает всех предков
+    //input[@id='password']/preceding::input[1] -- Выбирает все элементы выше указанного указанного уровня.
+    //input[@id='password']/preceding-sibling::input[1] -- выбирает
+    // только на том же уровне и перед указанным, т.е. любой элемент с тем же родителем и на том же уровне.
+    //*[@class='login_wrapper-inner']/following-sibling::div --выбирает все элементы «братского», то есть того же уровня
     //*[@data-test='password' and contains(@id, 'password')] или //div[@class=('inventory','item')]
     //h4/text()
     //link/@href

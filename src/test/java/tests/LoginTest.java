@@ -1,37 +1,43 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import constants.IConstants;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTest {
+import static tests.ITestConstants.PASSWORD;
+import static tests.ITestConstants.USERNAME;
+
+public class LoginTest extends BaseTest{
+    public static final String EMPTY_FIELD_USERNAME_ERROR = "Epic sadface: Username is required";
+    public static final String EMPTY_FIELD_PASSWORD_ERROR = "Epic sadface: Password is required";
+    public static final String INCORRECT_DATA_IN_FIELDS = "Epic sadface: Username and password do not match any user in this service";
+
+
 
     @Test
-    public void loginAddProductCheckInCart() {
-        WebDriver driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver.manage().window().setSize(new Dimension(1024, 768));
-        driver.get("https://saucedemo.com/");
-        WebElement userName = driver.findElement(By.id("user-name"));
-        WebElement password = driver.findElement(By.name("password"));
-        WebElement loginButton = driver.findElement(By.className("submit-button"));
-        userName.sendKeys("standard_user");
-        password.sendKeys("secret_sauce");
-        loginButton.click();
-        WebElement addToCartButton = driver.findElement(By.xpath("//*[@data-test='add-to-cart-sauce-labs-backpack']"));
-        WebElement cartButton = driver.findElement(By.id("shopping_cart_container"));
-        String productName = driver.findElement(By.xpath("//*[text()='Sauce Labs Backpack']")).getText();
-        String productPrice = driver.findElement(By.xpath("//*[contains(@id,'sauce-labs-backpack')]/../div[@class='inventory_item_price']")).getText();
-        addToCartButton.click();
-        cartButton.click();
-        WebElement nameProductInCart = driver.findElement(By.xpath("//div[@class='inventory_item_name']"));
-        String productPriceInCart = driver.findElement(By.xpath("//div[@class='inventory_item_price']")).getText();
-        Assert.assertEquals(nameProductInCart.getText(), productName);
-        Assert.assertEquals(productPriceInCart.split("\n")[0], productPrice.split("\n")[0]);
-        driver.quit();
+    public void loginWithEmptyUserNameTest(){
+        loginPage.openPage(IConstants.LOGIN_PAGE_URL);
+        loginPage.login("",PASSWORD);
+        Assert.assertEquals(loginPage.getErrorMessageTest(),EMPTY_FIELD_USERNAME_ERROR);
+    }
+        @Test
+        public void loginWithEmptyPasswordTest(){
+            loginPage.openPage(IConstants.LOGIN_PAGE_URL);
+            loginPage.login(USERNAME,"");
+            Assert.assertEquals(loginPage.getErrorMessageTest(),EMPTY_FIELD_PASSWORD_ERROR);
+        }
+
+        @Test
+        public void loginWithEmptyFieldsTest(){
+            loginPage.openPage(IConstants.LOGIN_PAGE_URL);
+            loginPage.login("","");
+            Assert.assertEquals(loginPage.getErrorMessageTest(),EMPTY_FIELD_USERNAME_ERROR);
+        }
+
+    @Test
+    public void loginWithIncorrectFieldsTest() {
+        loginPage.openPage(LOGIN_PAGE_URL);
+        loginPage.login("efwefwe", "efwfwe");
+        Assert.assertEquals(loginPage.getErrorMessageTest(), INCORRECT_DATA_IN_FIELDS);
     }
 }
