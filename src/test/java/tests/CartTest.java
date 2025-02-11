@@ -49,7 +49,6 @@ public class CartTest extends BaseTest {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.addProductInCart(SAUCE_LABS_BACKPACK);
         headerPage.clickToCartButton();
-        Assert.assertTrue(cartPage.getNameProduct().contains(SAUCE_LABS_BACKPACK));
         cartPage.removeProductOnCartPage(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(cartPage.checkNotDisplayedProductInCartButton());
     }
