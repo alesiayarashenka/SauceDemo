@@ -5,18 +5,17 @@ import org.openqa.selenium.WebDriver;
 
 public class HeaderPage extends BasePage {
 
+    public static final By CART_BUTTON = By.id("shopping_cart_container");
+
     public HeaderPage(WebDriver driver) {
         super(driver);
     }
-
-    public static final By CART_BUTTON = By.id("shopping_cart_container");
 
     public void clickToCartButton() {
         driver.findElement(CART_BUTTON).click();
     }
 
     public String countProductsInCart() {
-        String counter = driver.findElement(CART_BUTTON).getText();
-        return counter;
+        return driver.findElement(CART_BUTTON).getText();
     }
 }

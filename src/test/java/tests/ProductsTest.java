@@ -28,6 +28,7 @@ public class ProductsTest extends BaseTest {
         productsPage.removeProductInCart(SAUCE_LABS_BACKPACK);
         softAssert.assertTrue(productsPage.checkNotDisplayedRemoveButton(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(productsPage.checkDisplayedAddToCartButton(SAUCE_LABS_BACKPACK));
+        softAssert.assertAll();
     }
 
     @Test(description = "Add products in cart and check counter of products in cart on the product page")
