@@ -12,7 +12,4 @@ public interface ITestConstants {
     String TEST_ALL_THE_THINGS_T_SHIRT_RED = "Test.allTheThings() T-Shirt (Red)";
     String SAUCE_LABS_BACKPACK_PRICE = "$29.99";
     String SAUCE_LABS_BIKE_LIGHT_PRICE = "$9.99";
-
-
-
 }
