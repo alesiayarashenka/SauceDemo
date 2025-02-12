@@ -14,11 +14,16 @@ public class CartPage extends HeaderPage {
     public static final By PRODUCT_QUANTITY_IN_CART = By.xpath("//div[@class='cart_quantity']");
     public static final By CONTINUE_SHOPPING_BUTTON = By.xpath("//button[@id='continue-shopping']");
     public static final By CHECKOUT_BUTTON = By.xpath("//button[@id='checkout']");
-    public static final String PRODUCT_ITEM = "//*[text()='%s']/ancestor::*";
+    public static final String PRODUCT_ITEM = "//*[text()='%s']/ancestor::*[@class" + "='cart_item']";
     public static final String REMOVE_PRODUCT_ON_CART_BUTTON = PRODUCT_ITEM + "//*[contains" + "(text(), 'Remove')]";
+    public static final String CART_ITEM_CONTAINER = "//*[@class='cart_item']";
 
     public CartPage(WebDriver driver) {
         super(driver);
+    }
+
+    public void openCartPage(String url) {
+        driver.get(url);
     }
 
     public List<String> getNameProduct() {
@@ -46,6 +51,10 @@ public class CartPage extends HeaderPage {
             quantity.add(webElement.getText());
         }
         return quantity;
+    }
+
+    public Integer getAllProductsQuantity() {
+        return driver.findElements(By.xpath(CART_ITEM_CONTAINER)).size();
     }
 
     public void continueShopping() {
