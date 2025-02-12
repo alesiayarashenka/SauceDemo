@@ -10,5 +10,6 @@ public interface ITestConstants {
     String SAUCE_LABS_FLEECE_JACKET = "Sauce Labs Fleece Jacket";
     String SAUCE_LABS_ONESIE = "Sauce Labs Onesie";
     String TEST_ALL_THE_THINGS_T_SHIRT_RED = "Test.allTheThings() T-Shirt (Red)";
-
+    String SAUCE_LABS_BACKPACK_PRICE = "$29.99";
+    String SAUCE_LABS_BIKE_LIGHT_PRICE = "$9.99";
 }
