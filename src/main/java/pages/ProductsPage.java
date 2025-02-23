@@ -16,10 +16,11 @@ public class ProductsPage extends HeaderPage {
         super(driver);
     }
 
-    public void addProductInCart(String... productName) {
+    public ProductsPage addProductInCart(String... productName) {
         for (String productNames : productName) {
             driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productNames))).click();
         }
+        return this;
     }
 
     public void removeProductInCart(String... productName) {

@@ -61,3 +61,37 @@
 9. Совершить оплату
 10. Проверка отображения корректного сообщения
 11. Вернуться у списку товаров после оплаты
+
+1.Команда для просмотра доступных обновлений библиотек
+PS D:\work\SauceDemo> mvn versions:display-dependency-updates
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------------< org.example:SausceDemo >-----------------------
+[INFO] Building SausceDemo 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- versions-maven-plugin:2.18.0:display-dependency-updates (default-cli) @ SausceDemo ---
+[INFO] No dependencies in Dependencies have newer versions.
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.864 s
+[INFO] Finished at: 2025-02-19T15:35:35+03:00
+[INFO] ------------------------------------------------------------------------
+
+2. Команда для автоматического обновления всех версий
+PS D:\work\SauceDemo> mvn versions:use-latest-versions
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------------< org.example:SausceDemo >-----------------------
+[INFO] Building SausceDemo 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- versions-maven-plugin:2.18.0:use-latest-versions (default-cli) @ SausceDemo ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.920 s
+[INFO] Finished at: 2025-02-19T15:30:46+03:00
+[INFO] ------------------------------------------------------------------------

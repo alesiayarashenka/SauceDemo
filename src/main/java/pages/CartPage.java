@@ -22,8 +22,9 @@ public class CartPage extends HeaderPage {
         super(driver);
     }
 
-    public void openCartPage(String url) {
+    public CartPage openCartPage(String url) {
         driver.get(url);
+        return this;
     }
 
     public List<String> getNameProduct() {
@@ -42,6 +43,10 @@ public class CartPage extends HeaderPage {
             price.add(webElement.getText().split("\n")[0]);
         }
         return price;
+    }
+
+    public String getProductPrice() {
+        return driver.findElement(PRODUCT_PRICE_IN_CART).getText();
     }
 
     public List<String> quantityProductsInCart() {
@@ -81,10 +86,11 @@ public class CartPage extends HeaderPage {
         return removeButton.contains(productName);
     }
 
-    public void removeProductOnCartPage(String... productName) {
+    public CartPage removeProductOnCartPage(String... productName) {
         for (String productNames : productName) {
             driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_ON_CART_BUTTON, productNames))).click();
         }
+        return this;
     }
 
     public boolean checkNotDisplayedProductInCartButton() {
