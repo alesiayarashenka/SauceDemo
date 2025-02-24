@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import waiters.Waiter;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import static tests.ITestConstants.SAUCE_LABS_BACKPACK;
 public class CartTest extends BaseTest {
 
     SoftAssert softAssert = new SoftAssert();
+    Waiter waiter = new Waiter();
 
     @DataProvider(name = "product")
     public Object[][] productsAndPrices() {
@@ -29,7 +31,7 @@ public class CartTest extends BaseTest {
     }
 
     /**
-     *
+     *This is checking for correct product price in cart page and product page
      * @param productName
      * @param price
      */
@@ -37,45 +39,59 @@ public class CartTest extends BaseTest {
     public void checkProductPriceInCartTest(String productName, String price) {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
+        waiter.waitForPageLoaded();
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(productName);
-        cartPage.openCartPage(CART_PAGE_URL);
+        cartPage
+                .openCartPage(CART_PAGE_URL);
+        waiter.waitForPageLoaded();
         Assert.assertEquals(cartPage.getProductPrice(), price);
     }
 
+    /**
+     * This is checking for correct product name, price and quantity in cart page
+     */
     @Test()
     public void loginAddProductCheckNameQuantityInCart() {
         List<String> productNames = List.of(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
         List<String> productPrices = List.of(SAUCE_LABS_BACKPACK_PRICE, SAUCE_LABS_BIKE_LIGHT_PRICE);
         loginPage
                 .openPage(IConstants.LOGIN_PAGE_URL);
+        waiter.waitForPageLoaded();
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        headerPage.clickToCartButton();
+        cartPage
+                .openCartPage(CART_PAGE_URL);
+        waiter.waitForPageLoaded();
         softAssert.assertTrue(cartPage.getNameProduct().containsAll(productNames));
         softAssert.assertTrue(cartPage.getPriceProduct().containsAll(productPrices));
         softAssert.assertTrue(cartPage.quantityProductsInCart().contains("1"));
         softAssert.assertAll();
     }
 
+    /**
+     * This is checking for buttons "continue","checkout" and "remove" display on the cart page and for "remove" buttons after redirect to product page
+     */
     @Test(retryAnalyzer = Retry.class)
     public void loginAddProductContinueShopping() {
         loginPage
                 .openPage(IConstants.LOGIN_PAGE_URL);
+        waiter.waitForPageLoaded();
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        headerPage.clickToCartButton();
+        cartPage
+                .openCartPage(CART_PAGE_URL);
+        waiter.waitForPageLoaded();
         softAssert.assertTrue(cartPage.displayedButton(CONTINUE_SHOPPING_BUTTON));
         softAssert.assertTrue(cartPage.displayedButton(CHECKOUT_BUTTON));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BIKE_LIGHT));
-        cartPage.continueShopping();
+        cartPage
+                .continueShopping();
+        waiter.waitForPageLoaded();
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BIKE_LIGHT));
         softAssert.assertAll();
@@ -85,8 +101,8 @@ public class CartTest extends BaseTest {
     public void loginAddProductAndRemove() {
         loginPage
                 .openPage(IConstants.LOGIN_PAGE_URL);
+        waiter.waitForPageLoaded();
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK);
         cartPage
