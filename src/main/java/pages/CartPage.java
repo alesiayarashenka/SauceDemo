@@ -3,11 +3,14 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import waiters.Waiter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartPage extends HeaderPage {
+
+    Waiter waiter = new Waiter();
 
     public static final By PRODUCT_NAME_IN_CART = By.xpath("//div[@class = 'inventory_item_name']");
     public static final By PRODUCT_PRICE_IN_CART = By.xpath("//div[@class='inventory_item_price']");
@@ -28,6 +31,7 @@ public class CartPage extends HeaderPage {
      * @return
      */
     public CartPage openCartPage(String url) {
+        waiter.waitForPageLoaded();
         driver.get(url);
         return this;
     }
@@ -93,6 +97,7 @@ public class CartPage extends HeaderPage {
      */
     public ProductsPage continueShopping() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
+        waiter.waitForPageLoaded();
         return new ProductsPage(driver);
     }
 

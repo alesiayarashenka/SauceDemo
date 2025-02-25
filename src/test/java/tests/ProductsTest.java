@@ -3,7 +3,6 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import waiters.Waiter;
 
 import static tests.ITestConstants.*;
 
@@ -17,13 +16,11 @@ public class ProductsTest extends BaseTest {
     //cartPage.getPrice("Product Name")
     //Assertions
     SoftAssert softAssert = new SoftAssert();
-    Waiter waiter = new Waiter();
 
     @Test(description = "Add product in cart and check buttons, remove product from cart and check buttons on the product page")
     public void loginAddProductRemoveFromCart() {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
-        waiter.waitForPageLoaded();
         loginPage
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK);
@@ -40,7 +37,6 @@ public class ProductsTest extends BaseTest {
     public void loginAddProductCheckInCart() {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
-        waiter.waitForPageLoaded();
         loginPage
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK);
