@@ -16,6 +16,10 @@ public class ProductsPage extends HeaderPage {
         super(driver);
     }
 
+    /**
+     * This is adding products in a cart
+     * @return
+     */
     public ProductsPage addProductInCart(String... productName) {
         for (String productNames : productName) {
             driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productNames))).click();
@@ -23,27 +27,48 @@ public class ProductsPage extends HeaderPage {
         return this;
     }
 
-    public void removeProductInCart(String... productName) {
+    /**
+     * This is removing products from cart
+     * @return
+     */
+    public ProductsPage removeProductInCart(String... productName) {
         for (String productNames : productName) {
             driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productNames))).click();
         }
+        return this;
     }
 
+    /**
+     * This is checking for missing remove button
+     * @return
+     */
     public boolean checkNotDisplayedRemoveButton(String productName) {
         List<WebElement> removeButton = driver.findElements(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName)));
         return removeButton.isEmpty();
     }
 
+    /**
+     * This is checking for missing add to cart button
+     * @return
+     */
     public boolean checkNotDisplayedAddToCartButton(String productName) {
         List<WebElement> addButton = driver.findElements(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName)));
         return addButton.isEmpty();
     }
 
+    /**
+     * This is checking for the display remove button
+     * @return
+     */
     public boolean checkDisplayedRemoveButton(String productName) {
         List<WebElement> removeButton = driver.findElements(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName)));
         return removeButton.contains(productName);
     }
 
+    /**
+     * This is checking for the display add to cart button
+     * @return
+     */
     public boolean checkDisplayedAddToCartButton(String productName) {
         List<WebElement> addToCartButton = driver.findElements(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName)));
         return addToCartButton.contains(productName);

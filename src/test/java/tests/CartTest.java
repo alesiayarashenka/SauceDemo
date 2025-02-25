@@ -29,7 +29,7 @@ public class CartTest extends BaseTest {
     }
 
     /**
-     *
+     *This is checking for correct product price in cart page and product page
      * @param productName
      * @param price
      */
@@ -38,13 +38,16 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(productName);
-        cartPage.openCartPage(CART_PAGE_URL);
+        cartPage
+                .openCartPage(CART_PAGE_URL);
         Assert.assertEquals(cartPage.getProductPrice(), price);
     }
 
+    /**
+     * This is checking for correct product name, price and quantity in cart page
+     */
     @Test()
     public void loginAddProductCheckNameQuantityInCart() {
         List<String> productNames = List.of(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
@@ -52,30 +55,34 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(IConstants.LOGIN_PAGE_URL);
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        headerPage.clickToCartButton();
+        cartPage
+                .openCartPage(CART_PAGE_URL);
         softAssert.assertTrue(cartPage.getNameProduct().containsAll(productNames));
         softAssert.assertTrue(cartPage.getPriceProduct().containsAll(productPrices));
         softAssert.assertTrue(cartPage.quantityProductsInCart().contains("1"));
         softAssert.assertAll();
     }
 
+    /**
+     * This is checking for buttons "continue","checkout" and "remove" display on the cart page and for "remove" buttons after redirect to product page
+     */
     @Test(retryAnalyzer = Retry.class)
     public void loginAddProductContinueShopping() {
         loginPage
                 .openPage(IConstants.LOGIN_PAGE_URL);
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        headerPage.clickToCartButton();
+        cartPage
+                .openCartPage(CART_PAGE_URL);
         softAssert.assertTrue(cartPage.displayedButton(CONTINUE_SHOPPING_BUTTON));
         softAssert.assertTrue(cartPage.displayedButton(CHECKOUT_BUTTON));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BIKE_LIGHT));
-        cartPage.continueShopping();
+        cartPage
+                .continueShopping();
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BIKE_LIGHT));
         softAssert.assertAll();
@@ -86,7 +93,6 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(IConstants.LOGIN_PAGE_URL);
         loginPage
-                .waitForPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addProductInCart(SAUCE_LABS_BACKPACK);
         cartPage

@@ -39,6 +39,9 @@ public class BaseTest implements IConstants {
         loginPageFactory = new LoginPageFactory(driver);
     }
 
+    /**
+     * This is closing of pages
+     */
     @AfterMethod
     public void endTest(){
         driver.quit();

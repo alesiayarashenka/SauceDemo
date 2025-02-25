@@ -11,10 +11,19 @@ public class HeaderPage extends BasePage {
         super(driver);
     }
 
-    public void clickToCartButton() {
+    /**
+     * This is opening cart page by click
+     * @return
+     */
+    public CartPage clickToCartButton() {
         driver.findElement(CART_BUTTON).click();
+        return new CartPage(driver);
     }
 
+    /**
+     * This is returning amount of products on the cart counter
+     * @return
+     */
     public String countProductsInCart() {
         return driver.findElement(CART_BUTTON).getText();
     }
