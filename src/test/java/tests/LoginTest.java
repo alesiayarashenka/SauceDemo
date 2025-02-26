@@ -37,8 +37,7 @@ public class LoginTest extends Preconditions {
      */
     @Test
     public void loginWithEmptyFieldsTest() {
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(userEmptyFields);
+        loginSteps.loginAndWaitForPageOpened(userEmptyFields);
         Assert.assertEquals(loginPage.getErrorMessageTest(), EMPTY_FIELD_USERNAME_ERROR);
     }
 

@@ -61,8 +61,7 @@ public class ProductsPage extends HeaderPage {
      * @return
      */
     public boolean checkDisplayedRemoveButton(String productName) {
-        List<WebElement> removeButton = driver.findElements(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName)));
-        return removeButton.contains(productName);
+       return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName))).isDisplayed();
     }
 
     /**
@@ -70,8 +69,7 @@ public class ProductsPage extends HeaderPage {
      * @return
      */
     public boolean checkDisplayedAddToCartButton(String productName) {
-        List<WebElement> addToCartButton = driver.findElements(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName)));
-        return addToCartButton.contains(productName);
+      return driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).isDisplayed();
     }
 
 }
