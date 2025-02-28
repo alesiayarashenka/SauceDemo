@@ -18,7 +18,7 @@ public class ProductSteps {
     }
 
     @Step("Login and add product to cart")
-    public ProductSteps loginAndAddProductToCart(String username, String password, String productName) {
+    public ProductSteps loginAndAddProductToCart(String username, String password, String... productName) {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(username, password);
         productsPage.addProductInCart(productName);
@@ -26,10 +26,16 @@ public class ProductSteps {
     }
 
     @Step("Login and add product to cart")
-    public ProductSteps loginAndAddProductToCart(User user, String productName) {
+    public ProductSteps loginAndAddProductToCart(User user, String... productName) {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(user);
         productsPage.addProductInCart(productName);
+        return this;
+    }
+
+    @Step("Remove product from cart")
+    public ProductSteps removeProductFromCartInCartPage(String... productName) {
+        productsPage.removeProductInCart(productName);
         return this;
     }
 }

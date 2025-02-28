@@ -1,6 +1,5 @@
 package tests;
 
-import constants.IConstants;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,6 +10,8 @@ import java.util.List;
 import static pages.CartPage.*;
 import static tests.ITestConstants.*;
 import static tests.ITestConstants.SAUCE_LABS_BACKPACK;
+import static tests.Preconditions.userSuccessLogin;
+
 
 public class CartTest extends BaseTest {
 
@@ -18,7 +19,7 @@ public class CartTest extends BaseTest {
 
     @DataProvider(name = "product")
     public Object[][] productsAndPrices() {
-        return new Object[][] {
+        return new Object[][]{
                 {SAUCE_LABS_BACKPACK, "$29.99"},
                 {SAUCE_LABS_BOLT_T_SHIRT, "$15.99"},
                 {SAUCE_LABS_BIKE_LIGHT, "$9.99"},
@@ -29,19 +30,15 @@ public class CartTest extends BaseTest {
     }
 
     /**
-     *This is checking for correct product price in cart page and product page
+     * This is checking for correct product price in cart page and product page
+     *
      * @param productName
      * @param price
      */
     @Test(dataProvider = "product")
     public void checkProductPriceInCartTest(String productName, String price) {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addProductInCart(productName);
-        cartPage
-                .openCartPage(CART_PAGE_URL);
+        productSteps.loginAndAddProductToCart(userSuccessLogin, productName);
+        cartPage.openPage(CART_PAGE_URL);
         Assert.assertEquals(cartPage.getProductPrice(), price);
     }
 
@@ -52,13 +49,8 @@ public class CartTest extends BaseTest {
     public void loginAddProductCheckNameQuantityInCart() {
         List<String> productNames = List.of(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
         List<String> productPrices = List.of(SAUCE_LABS_BACKPACK_PRICE, SAUCE_LABS_BIKE_LIGHT_PRICE);
-        loginPage
-                .openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addProductInCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        cartPage
-                .openCartPage(CART_PAGE_URL);
+        productSteps.loginAndAddProductToCart(userSuccessLogin, SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
+        cartPage.openPage(CART_PAGE_URL);
         softAssert.assertTrue(cartPage.getNameProduct().containsAll(productNames));
         softAssert.assertTrue(cartPage.getPriceProduct().containsAll(productPrices));
         softAssert.assertTrue(cartPage.quantityProductsInCart().contains("1"));
@@ -70,19 +62,13 @@ public class CartTest extends BaseTest {
      */
     @Test(retryAnalyzer = Retry.class)
     public void loginAddProductContinueShopping() {
-        loginPage
-                .openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addProductInCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        cartPage
-                .openCartPage(CART_PAGE_URL);
+        productSteps.loginAndAddProductToCart(userSuccessLogin, SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
+        cartPage.openPage(CART_PAGE_URL);
         softAssert.assertTrue(cartPage.displayedButton(CONTINUE_SHOPPING_BUTTON));
         softAssert.assertTrue(cartPage.displayedButton(CHECKOUT_BUTTON));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BIKE_LIGHT));
-        cartPage
-                .continueShopping();
+        cartPage.continueShopping();
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BIKE_LIGHT));
         softAssert.assertAll();
@@ -90,14 +76,8 @@ public class CartTest extends BaseTest {
 
     @Test(description = "Add product in cart, remove product, check the product is not displayed")
     public void loginAddProductAndRemove() {
-        loginPage
-                .openPage(IConstants.LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addProductInCart(SAUCE_LABS_BACKPACK);
-        cartPage
-                .openCartPage(CART_PAGE_URL)
-                .removeProductOnCartPage(SAUCE_LABS_BACKPACK);
+        productSteps.loginAndAddProductToCart(userSuccessLogin, SAUCE_LABS_BACKPACK);
+        cartSteps.openCartPageAndRemoveProduct(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(cartPage.checkNotDisplayedProductInCartButton());
     }
 }

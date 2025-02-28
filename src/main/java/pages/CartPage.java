@@ -27,6 +27,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * this is opening CartPage
+     *
      * @param url
      * @return
      */
@@ -38,6 +39,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is returning names of many products
+     *
      * @return
      */
     public List<String> getNameProduct() {
@@ -51,6 +53,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is returning prices of many products
+     *
      * @return
      */
     public List<String> getPriceProduct() {
@@ -64,6 +67,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is returning price of one product
+     *
      * @return
      */
     public String getProductPrice() {
@@ -72,6 +76,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is returning quantity for each product on the page
+     *
      * @return
      */
     public List<String> quantityProductsInCart() {
@@ -85,6 +90,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is returning all quantity of products on the page
+     *
      * @return
      */
     public Integer getAllProductsQuantity() {
@@ -93,6 +99,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is returning from cart page to product page
+     *
      * @return
      */
     public ProductsPage continueShopping() {
@@ -103,6 +110,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is directing from cart page to checkout page
+     *
      * @return
      */
     public void directInCheckout() {
@@ -111,6 +119,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is checking for displayed button and quantity of button
+     *
      * @return
      */
     public boolean displayedButton(By webElement) {
@@ -126,14 +135,16 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is checking for the display remove button
+     *
      * @return
      */
     public boolean checkDisplayedRemoveButtonInCart(String productName) {
-         return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_ON_CART_BUTTON, productName))).isDisplayed();
+        return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_ON_CART_BUTTON, productName))).isDisplayed();
     }
 
     /**
      * This is removing product from cart
+     *
      * @return
      */
     public CartPage removeProductOnCartPage(String... productName) {
@@ -145,6 +156,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is checking for missing remove button
+     *
      * @return
      */
     public boolean checkNotDisplayedProductInCartButton() {

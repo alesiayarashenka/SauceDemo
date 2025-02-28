@@ -45,6 +45,7 @@ public class BaseTest implements IConstants {
         loginPageFactory = new LoginPageFactory(driver);
         productSteps = new ProductSteps(driver);
         loginSteps = new LoginSteps(driver);
+        cartSteps = new CartSteps(driver);
     }
 
     /**
