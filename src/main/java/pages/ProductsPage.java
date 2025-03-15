@@ -1,11 +1,13 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+@Log4j2
 public class ProductsPage extends HeaderPage {
 
     public static final String PRODUCT_ITEM = "//*[text()='%s']/ancestor::*[@class" + "='inventory_item']";
@@ -23,6 +25,7 @@ public class ProductsPage extends HeaderPage {
     public ProductsPage addProductInCart(String... productName) {
         for (String productNames : productName) {
             driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productNames))).click();
+            log.info("Product {} was added in a cart", productName);
         }
         return this;
     }
@@ -34,6 +37,7 @@ public class ProductsPage extends HeaderPage {
     public ProductsPage removeProductInCart(String... productName) {
         for (String productNames : productName) {
             driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productNames))).click();
+            log.info("Product {} was removed from cart", productName);
         }
         return this;
     }
@@ -61,7 +65,7 @@ public class ProductsPage extends HeaderPage {
      * @return
      */
     public boolean checkDisplayedRemoveButton(String productName) {
-       return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName))).isDisplayed();
+        return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName))).isDisplayed();
     }
 
     /**
@@ -69,7 +73,6 @@ public class ProductsPage extends HeaderPage {
      * @return
      */
     public boolean checkDisplayedAddToCartButton(String productName) {
-      return driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).isDisplayed();
+        return driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).isDisplayed();
     }
-
 }

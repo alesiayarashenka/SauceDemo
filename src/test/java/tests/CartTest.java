@@ -38,8 +38,8 @@ public class CartTest extends BaseTest {
     @Test(dataProvider = "product")
     public void checkProductPriceInCartTest(String productName, String price) {
         productSteps.loginAndAddProductToCart(userSuccessLogin, productName);
-        cartPage.openPage(CART_PAGE_URL);
-        Assert.assertEquals(cartPage.getProductPrice(), price);
+        cartSteps.openCartPage();
+        Assert.assertEquals(cartPage.getProductPrice(productName), price);
     }
 
     /**
@@ -50,7 +50,7 @@ public class CartTest extends BaseTest {
         List<String> productNames = List.of(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
         List<String> productPrices = List.of(SAUCE_LABS_BACKPACK_PRICE, SAUCE_LABS_BIKE_LIGHT_PRICE);
         productSteps.loginAndAddProductToCart(userSuccessLogin, SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        cartPage.openPage(CART_PAGE_URL);
+        cartSteps.openCartPage();
         softAssert.assertTrue(cartPage.getNameProduct().containsAll(productNames));
         softAssert.assertTrue(cartPage.getPriceProduct().containsAll(productPrices));
         softAssert.assertTrue(cartPage.quantityProductsInCart().contains("1"));
@@ -63,12 +63,12 @@ public class CartTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void loginAddProductContinueShopping() {
         productSteps.loginAndAddProductToCart(userSuccessLogin, SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
-        cartPage.openPage(CART_PAGE_URL);
+        cartSteps.openCartPage();
         softAssert.assertTrue(cartPage.displayedButton(CONTINUE_SHOPPING_BUTTON));
         softAssert.assertTrue(cartPage.displayedButton(CHECKOUT_BUTTON));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(cartPage.checkDisplayedRemoveButtonInCart(SAUCE_LABS_BIKE_LIGHT));
-        cartPage.continueShopping();
+        cartSteps.returnToProductPage();
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BACKPACK));
         softAssert.assertTrue(productsPage.checkDisplayedRemoveButton(SAUCE_LABS_BIKE_LIGHT));
         softAssert.assertAll();

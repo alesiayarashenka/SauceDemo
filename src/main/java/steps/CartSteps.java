@@ -24,4 +24,17 @@ public class CartSteps {
         cartPage.removeProductOnCartPage(productName);
         return this;
     }
+
+    @Step("Open cart page and wait for loaded")
+    public CartSteps openCartPage() {
+        cartPage.openCartPage(IConstants.CART_PAGE_URL);
+        waiter.waitForPageLoaded();
+        return this;
+    }
+
+    @Step("Return to product page from cart page")
+    public CartSteps returnToProductPage() {
+        cartPage.continueShopping();
+        return this;
+    }
 }
