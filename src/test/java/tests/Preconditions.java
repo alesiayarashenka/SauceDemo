@@ -14,7 +14,7 @@ public class Preconditions extends BaseTest{
 
     protected static final User userWithEmptyPassword = User.builder()
             .password("")
-            .username(USERNAME)
+            .username(System.getProperty("username"))
             .build();
 
     protected static final User userEmptyFields = User.builder()
@@ -29,6 +29,6 @@ public class Preconditions extends BaseTest{
 
     protected static final User userSuccessLogin = User.builder()
             .password(PASSWORD)
-            .username(USERNAME)
+            .username(System.getProperty("username"))
             .build();
 }
