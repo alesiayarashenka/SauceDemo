@@ -13,7 +13,7 @@ import pages.LoginPage;
             loginPage = new LoginPage(driver);
         }
 
-        @Step("")
+        @Step("Login and wait for page loaded")
         public LoginSteps loginAndWaitForPageOpened(String username, String password) {
             loginPage.openPage(IConstants.LOGIN_PAGE_URL);
             loginPage
@@ -22,7 +22,7 @@ import pages.LoginPage;
             return this;
         }
 
-        @Step("")
+        @Step("Login and wait for page loaded")
         public LoginSteps loginAndWaitForPageOpened(User user) {
             loginPage.openPage(IConstants.LOGIN_PAGE_URL);
             loginPage
@@ -30,5 +30,5 @@ import pages.LoginPage;
                     .login(user);
             return this;
         }
-    }
+}
 

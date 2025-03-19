@@ -1,8 +1,10 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+@Log4j2
 public class HeaderPage extends BasePage {
 
     public static final By CART_BUTTON = By.id("shopping_cart_container");
@@ -25,6 +27,8 @@ public class HeaderPage extends BasePage {
      * @return
      */
     public String countProductsInCart() {
-        return driver.findElement(CART_BUTTON).getText();
+        String countProduct = driver.findElement(CART_BUTTON).getText();
+        log.info("Value of cart counter is: {}", countProduct);
+        return countProduct;
     }
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import waiters.Waiter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 public class CartPage extends HeaderPage {
 
     Waiter waiter = new Waiter();
@@ -27,37 +29,45 @@ public class CartPage extends HeaderPage {
 
     /**
      * this is opening CartPage
+     *
      * @param url
      * @return
      */
     public CartPage openCartPage(String url) {
         waiter.waitForPageLoaded();
+        log.info("Open Cart Page Url {}", url);
         driver.get(url);
         return this;
     }
 
     /**
      * This is returning names of many products
+     *
      * @return
      */
     public List<String> getNameProduct() {
         List<String> name = new ArrayList<>();
         List<WebElement> nameProduct = driver.findElements(PRODUCT_NAME_IN_CART);
         for (WebElement webElement : nameProduct) {
-            name.add(webElement.getText());
+            String nameElem = webElement.getText();
+            name.add(nameElem);
+            log.info("Product {} was added in a cart", nameElem);
         }
         return name;
     }
 
     /**
      * This is returning prices of many products
+     *
      * @return
      */
     public List<String> getPriceProduct() {
         List<String> price = new ArrayList<>();
         List<WebElement> priceProduct = driver.findElements(PRODUCT_PRICE_IN_CART);
         for (WebElement webElement : priceProduct) {
-            price.add(webElement.getText().split("\n")[0]);
+            String priceElem = (webElement.getText().split("\n")[0]);
+            price.add(priceElem);
+            log.info("Price of product is: {}", priceElem);
         }
         return price;
     }
@@ -66,33 +76,41 @@ public class CartPage extends HeaderPage {
      * This is returning price of one product
      * @return
      */
-    public String getProductPrice() {
-        return driver.findElement(PRODUCT_PRICE_IN_CART).getText();
+    public String getProductPrice(String productName) {
+        String productPrice = driver.findElement(PRODUCT_PRICE_IN_CART).getText();
+        log.info("Get price for product: {}. Price is: {}", productName, productPrice);
+        return productPrice;
     }
 
     /**
      * This is returning quantity for each product on the page
+     *
      * @return
      */
     public List<String> quantityProductsInCart() {
         List<String> quantity = new ArrayList<>();
         List<WebElement> quantityProduct = driver.findElements(PRODUCT_QUANTITY_IN_CART);
         for (WebElement webElement : quantityProduct) {
-            quantity.add(webElement.getText());
+            String productQuantity = webElement.getText();
+            quantity.add(productQuantity);
+            log.info("Quantity of product is: {}", productQuantity);
         }
         return quantity;
     }
 
     /**
      * This is returning all quantity of products on the page
+     *
      * @return
      */
     public Integer getAllProductsQuantity() {
-        return driver.findElements(By.xpath(CART_ITEM_CONTAINER)).size();
+        int productQuantity = driver.findElements(By.xpath(CART_ITEM_CONTAINER)).size();
+        log.info("Get product quantity: {}", productQuantity);
+        return productQuantity;
     }
-
     /**
      * This is returning from cart page to product page
+     *
      * @return
      */
     public ProductsPage continueShopping() {
@@ -103,6 +121,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is directing from cart page to checkout page
+     *
      * @return
      */
     public void directInCheckout() {
@@ -111,6 +130,7 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is checking for displayed button and quantity of button
+     *
      * @return
      */
     public boolean displayedButton(By webElement) {
@@ -126,25 +146,29 @@ public class CartPage extends HeaderPage {
 
     /**
      * This is checking for the display remove button
+     *
      * @return
      */
     public boolean checkDisplayedRemoveButtonInCart(String productName) {
-         return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_ON_CART_BUTTON, productName))).isDisplayed();
+        return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_ON_CART_BUTTON, productName))).isDisplayed();
     }
 
     /**
      * This is removing product from cart
+     *
      * @return
      */
     public CartPage removeProductOnCartPage(String... productName) {
         for (String productNames : productName) {
             driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_ON_CART_BUTTON, productNames))).click();
+            log.info("Product {} was removed from cart", productName);
         }
         return this;
     }
 
     /**
      * This is checking for missing remove button
+     *
      * @return
      */
     public boolean checkNotDisplayedProductInCartButton() {
