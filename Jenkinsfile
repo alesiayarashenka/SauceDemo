@@ -10,7 +10,7 @@ pipeline {
     }
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'main', name: 'BRANCH', type: 'PT_BRANCH'
-         string(name: 'username', defaultValue: 'standard_user', description: '')
+         string(name: 'username', defaultValue: 'standard_user', description: 'dfg')
     }
 
    stages {
