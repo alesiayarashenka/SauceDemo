@@ -4,6 +4,7 @@
        <test name="ProductsTests">
         <classes>
             <class name="tests.ProductsTest" />
+            <parameter name="username" value=""/>
         </classes>
     </test>
 </suite>
