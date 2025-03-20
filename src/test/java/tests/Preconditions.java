@@ -2,7 +2,7 @@ package tests;
 
 import entity.User;
 
-import static tests.ITestConstants.PASSWORD;
+//import static tests.ITestConstants.PASSWORD;
 
 
 public class Preconditions extends BaseTest{
