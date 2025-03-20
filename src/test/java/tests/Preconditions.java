@@ -29,6 +29,6 @@ public class Preconditions extends BaseTest{
 
     protected static final User userSuccessLogin = User.builder()
             .password(PASSWORD)
-            .username(System.getProperty("username"))
+            .username(System.getenv("username"))
             .build();
 }
