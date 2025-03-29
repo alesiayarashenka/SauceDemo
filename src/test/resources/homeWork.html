@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        td, th {
+            border: 5px solid #FF69B4;
+            text-align: left;
+            padding: 10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #FFFFE0;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color:#1a5022;">ТОП Матчи</h1>
+<h1 style="color:#40ff00;">Выбери свой любимый вид спорта</h1>
+<form action="/action_page.php">
+    <label style="color:#0095ff;" for="sport">Выбери вид спорта:</label>
+    <select style="color:#003cff;" name="sport" id="sport">
+        <option style="color:#003cff;" value="football">Футбол</option>
+        <option  style="color:#003cff;"value="tennis">Теннис</option>
+        <option  style="color:#003cff;"value="iceHockey">Хокей</option>
+        <option  style="color:#003cff;"value=basketball">Баскетбол</option>
+    </select>
+    <br><br>
+</form>
+<table>
+    <tr>
+        <th>Событие</th>
+        <th>Время</th>
+        <th>Турнир</th>
+    </tr>
+    <tr>
+        <td>Ювентус - Дженоа</td>
+        <td>29.03.2025 19.00</td>
+        <td>Лига Чемпионов</td>
+    </tr>
+    <tr>
+        <td>Брайтон - Ноттингем Форест</td>
+        <td>29.03.2025 20.15</td>
+        <td>Лига Европы</td>
+    </tr>
+    <tr>
+        <td>Айнтрахт Франкфурт - Штутгарт</td>
+        <td>29.03.2025 20.15</td>
+        <td>Лига Конференций</td>
+    </tr>
+    <tr>
+        <td>Сент-Этьен - ПСЖ</td>
+        <td>29.03.2025 20.30</td>
+        <td>Франция Лига 1</td>
+    </tr>
+    <tr>
+        <td>Иллескас - СД Гвадалахара</td>
+        <td>29.03.2025 20.45</td>
+        <td>Испания Ла Лига</td>
+    </tr>
+    <tr>
+        <td>Арминия Билефельд - Ганновер 96 II</td>
+        <td>29.03.2025 21.15</td>
+        <td>Германия Бундеслига</td>
+    </tr>
+</table>
+<p style="color:#ff006a;">Чтобы сделать ставку, пожалуйста, залогиньтесь:</p>
+<form action="/action_page.php">
+    <label for="fname">Введите логин </label>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="lname">Введите пароль </label>
+    <input type="text" id="lname" name="lname"><br><br>
+    <input type="image" src="https://thumbs.dreamstime.com/b/%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B0-%D0%B2%D1%85%D0%BE%D0%B4%D0%B0-%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8-d-%D0%B7%D0%BD%D0%B0%D0%BA-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-177270138.jpg?w=992" alt="Submit" width="48" height="48">
+    <input type="checkbox" id="vehicle1" name="vehicle1" value="Mail">
+    <label for="vehicle1"> Я согласен на рекламную рассылку</label><br>
+</form>
+<p><b style="color:red;">Важно:</b> Если у Вас нет аккаунта, пожалуйста, зарегистрируйтесь</p>
+<input style="color:Maroon;" type="button" value="Регистрация">
+<a style="color:LawnGreen;" href="https://www.pm.by/"> Или перейдите по ссылке</a>
+</body>
+</html>
