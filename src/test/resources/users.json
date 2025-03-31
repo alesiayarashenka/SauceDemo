@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "email": "1@mail.ru",
+      "firstName": "first1",
+      "lastName": "last1",
+      "age": 20,
+      "isMan": true,
+      "additionalData": null
+    },
+    {
+      "email": "1@mail.ru",
+      "firstName": "first2",
+      "lastName": "2",
+      "age": 21
+    },
+    {
+      "email": "1@mail.ru",
+      "firstName": "first2",
+      "lastName": "2",
+      "age": 22
+    }
+  ]
+}
